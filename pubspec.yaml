@@ -1,0 +1,54 @@
+name: get_boilerplate
+description: A modern Flutter WebRTC video conferencing application.
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.2.0 <4.0.0"
+  flutter: ">=3.16.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI & State Management
+  cupertino_icons: ^1.0.8
+  get: ^4.6.6
+  get_storage: ^2.1.1
+
+  # Networking
+  http: ^1.2.0
+  socket_io_client: ^2.0.3+1
+
+  # WebRTC & Media
+  flutter_webrtc: ^1.2.0   # Upgraded
+  sdp_transform: ^0.3.2
+
+  # Permissions & Device Access
+  permission_handler: ^12.0.1
+  device_info_plus: ^12.1.0
+
+  # File Handling (for future features)
+  path_provider: ^2.1.2
+  file_picker: ^10.3.3
+  image_picker: ^1.2.0
+
+  # UI Enhancements
+  flutter_svg: ^2.0.9
+  cached_network_image: ^3.4.1
+
+  # Utilities
+  intl: ^0.20.2
+  uuid: ^4.3.3
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
