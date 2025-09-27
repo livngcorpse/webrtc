@@ -23,17 +23,18 @@ dependencies:
   socket_io_client: ^2.0.3+1
 
   # WebRTC & Media
-  flutter_webrtc: ^1.2.0   # Upgraded
+  flutter_webrtc: ^1.2.0
   sdp_transform: ^0.3.2
 
   # Permissions & Device Access
   permission_handler: ^12.0.1
   device_info_plus: ^12.1.0
 
-  # File Handling (for future features)
+  # File Handling & Sharing
   path_provider: ^2.1.2
   file_picker: ^10.3.3
   image_picker: ^1.2.0
+  share_plus: ^7.2.2
 
   # UI Enhancements
   flutter_svg: ^2.0.9
@@ -42,6 +43,11 @@ dependencies:
   # Utilities
   intl: ^0.20.2
   uuid: ^4.3.3
+  
+  # QR Code (for future feature)
+  qr_flutter: ^4.1.0
+  qr_code_scanner:
+    path: ../qr_code_scanner
   
 dev_dependencies:
   flutter_test:
@@ -52,3 +58,16 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  
+  # Assets
+  assets:
+    - assets/images/
+    - assets/icons/
+    
+  # Fonts (optional - for custom fonts)
+  # fonts:
+  #   - family: CustomFont
+  #     fonts:
+  #       - asset: assets/fonts/CustomFont-Regular.ttf
+  #       - asset: assets/fonts/CustomFont-Bold.ttf
+  #         weight: 700

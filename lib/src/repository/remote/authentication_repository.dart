@@ -1,15 +1,17 @@
+// Updated lib/src/repository/remote/authentication_repository.dart
 import 'dart:convert';
 import 'package:get_boilerplate/src/repository/base_repository.dart';
 import 'package:get_boilerplate/src/repository/remote/api_gateway.dart';
+import 'package:get_boilerplate/src/models/user_model.dart';
 
 class AuthenticationRepository {
   final HandleApis _handleApis = HandleApis();
 
   Future<ApiResponse<Map<String, dynamic>>> login(
-      String username, String password) async {
+      String email, String password) async {
     try {
       final body = {
-        "phone": username,
+        "email": email,
         "password": password,
       };
 
@@ -34,15 +36,17 @@ class AuthenticationRepository {
   }
 
   Future<ApiResponse<Map<String, dynamic>>> register(
-    String username,
+    String email,
     String password,
     String fullName,
+    UserRole role,
   ) async {
     try {
       final body = {
-        "phone": username,
+        "email": email,
         "password": password,
-        "fullName": fullName,
+        "name": fullName,
+        "role": role.name,
       };
 
       final response = await _handleApis.post(ApiGateway.REGISTER, body);
@@ -67,7 +71,7 @@ class AuthenticationRepository {
 
   Future<ApiResponse<bool>> logout() async {
     try {
-      // If you have a logout endpoint
+      // If you have a logout endpoint, uncomment this:
       // final response = await _handleApis.post(ApiGateway.LOGOUT, {});
 
       // For now, just return success (client-side logout)
@@ -120,6 +124,34 @@ class AuthenticationRepository {
       return ApiResponse.error(e.message);
     } catch (e) {
       return ApiResponse.error('Failed to get user profile: $e');
+    }
+  }
+
+  Future<ApiResponse<Map<String, dynamic>>> updateProfile({
+    String? name,
+    String? profilePicture,
+  }) async {
+    try {
+      final body = <String, dynamic>{};
+      if (name != null) body['name'] = name;
+      if (profilePicture != null) body['profilePicture'] = profilePicture;
+
+      final response = await _handleApis.put('auth/profile', body);
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseBody = jsonDecode(response.body);
+        final data = responseBody["data"] as Map<String, dynamic>? ?? {};
+
+        return ApiResponse.success(data,
+            message: 'Profile updated successfully');
+      } else {
+        return ApiResponse.error('Failed to update profile',
+            statusCode: response.statusCode);
+      }
+    } on NetworkException catch (e) {
+      return ApiResponse.error(e.message);
+    } catch (e) {
+      return ApiResponse.error('Failed to update profile: $e');
     }
   }
 }
